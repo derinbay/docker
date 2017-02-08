@@ -1,0 +1,19 @@
+version: '2.1'
+
+services:
+  hub:
+    image: selenium/hub
+    ports:
+      - 4444:4444
+  chromenode:
+    image: selenium/node-chrome
+    ports:
+      - 5900
+    depends_on:
+      - hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    extra_hosts:
+      - "dependency.domain.com:1.1.1.1"
+      
